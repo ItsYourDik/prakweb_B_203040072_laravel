@@ -32,4 +32,4 @@ Route::get('/about', function () {
 
 Route::get('/blog', [PostColltroller::class, 'index']);
 //halaman single posts
-Route::get('/posts/{slug}', [PostColltroller::class, 'show']);
+Route::get('/posts/{post:slug}', [PostColltroller::class, 'show']);
