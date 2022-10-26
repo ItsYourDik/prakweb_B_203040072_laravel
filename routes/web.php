@@ -3,6 +3,8 @@
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostColltroller;
+use App\Models\Category;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,3 +35,18 @@ Route::get('/about', function () {
 Route::get('/blog', [PostColltroller::class, 'index']);
 //halaman single posts
 Route::get('/posts/{post:slug}', [PostColltroller::class, 'show']);
+
+Route::get('/categories', function () {
+    return view('categories', [
+        'title' => 'Post Categories',
+        'categories' => Category::all()
+    ]);
+});
+
+Route::get('/categories/{category:slug}', function (Category $category) {
+    return view('category', [
+        'title' => $category->name,
+        'posts' => $category->posts,
+        'category' => $category->name,
+    ]);
+});
