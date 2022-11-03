@@ -1,10 +1,12 @@
 <?php
 
+
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostColltroller;
 use App\Models\Category;
 use App\Models\User;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -35,9 +37,10 @@ Route::get('/about', function () {
 
 
 
-Route::get('/blog', [PostColltroller::class, 'index']);
+Route::get('/posts', [PostColltroller::class, 'index']);
 //halaman single posts
 Route::get('/posts/{post:slug}', [PostColltroller::class, 'show']);
+
 
 Route::get('/categories', function () {
     return view('categories', [
@@ -47,18 +50,18 @@ Route::get('/categories', function () {
     ]);
 });
 
-Route::get('/categories/{category:slug}', function (Category $category) {
-    return view('posts', [
-        'title' => "Post By Category : $category->name",
-        'active' => 'categories',
-        'posts' => $category->posts->load('author', 'category')
-    ]);
-});
+// Route::get('/categories/{category:slug}', function (Category $category) {
+//     return view('posts', [
+//         'title' => "Post By Category : $category->name",
+//         'active' => 'categories',
+//         'posts' => $category->posts->load('author', 'category')
+//     ]);
+// });
 
-Route::get('/authors/{author:username}', function (User $author) {
-    return view('posts', [
-        'title' => "Post By Author : $author->name",
-        'active' => 'author',
-        'posts' => $author->posts->load('category', 'author')
-    ]);
-});
+// Route::get('/authors/{author:username}', function (User $author) {
+//     return view('posts', [
+//         'title' => "Post By Author : $author->name",
+//         'active' => 'author',
+//         'posts' => $author->posts->load('category', 'author')
+//     ]);
+// });
